@@ -1,4 +1,18 @@
-class Frog:
+class Actor:
+    def __init__(self):
+        pass 
+    def __str__(self):
+        pass 
+    def interact_with(self):
+        pass
+
+class Obstacle:
+    def __str__(self):
+        pass 
+    def action(self):
+        pass 
+    
+class Frog(Actor):
     def __init__(self,name):
         self.name = name 
     def __str__(self):
@@ -7,7 +21,7 @@ class Frog:
     def interact_with(self,obstacle):
         print(f"{self} the Frog encounters {obstacle} and {obstacle.action()}")
         
-class Bug:
+class Bug(Obstacle):
     def __str__(self):
         return "a bug"
     def action(self):
@@ -27,7 +41,7 @@ class Frog_World:
     def make_obstacle(self):
         return Bug()
         
-class Wizard:
+class Wizard(Actor):
     def __init__(self,name):
         self.name = name 
     def __str__(self):
@@ -36,7 +50,7 @@ class Wizard:
     def interact_with(self,obstacle):
         print(f"{self} the Wizard battles against {obstacle} and {obstacle.action()}")    
         
-class Ork:
+class Ork(Obstacle):
     def __str__(self):
         return " an evil ork"
     def action(self):
@@ -57,9 +71,16 @@ class WizardWorld:
     def make_obstacle(self):
         return Ork()
         
-        
-class GameEnvironment:
-    def __init__(self,factory):
+
+class AbstractFactory:
+    def __init__(self):
+        pass 
+    def play(self):
+        pass
+    
+class GameEnvironmentFactory(AbstractFactory):
+    def __init__(self,name,age):
+        factory = Frog_World(name) if age < 18 else WizardWorld(name)
         self.hero = factory.make_characters()
         self.obstacle = factory.make_obstacle()
     
@@ -80,8 +101,7 @@ def main():
     validate_input = False
     while not validate_input:
         validate_input,age = validate_age(name)
-    game = Frog_World  if age <= 18 else WizardWorld 
-    env = GameEnvironment(game(name))
+    env = GameEnvironmentFactory(name,age)
     env.play()   
     
 if __name__ == "__main__":
