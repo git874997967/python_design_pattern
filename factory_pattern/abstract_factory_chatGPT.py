@@ -38,8 +38,8 @@ class ColorShapeFactory(AbstractFactory):
         if color_type == 'red':
             return Red()
         elif color_type == 'blue':
-            return blue()
-        
+            return Blue()
+      
 def main():
     factory = ColorShapeFactory()
     shape = factory.create_shape('circle')

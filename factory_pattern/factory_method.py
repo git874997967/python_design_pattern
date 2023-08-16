@@ -6,10 +6,10 @@ class JSONConnector:
         self.filePath = filePath
         self.data = dict()
         with open(self.filePath,'r+',encoding= 'utf-8') as file:
-          self.data = json.load(file)
+            self.data = json.load(file)
     @property
     def parse_data(self):
-      return self.data
+        return self.data
 class XMLConnector:
     def __init__(self,filePath):
         self.filePath = filePath
